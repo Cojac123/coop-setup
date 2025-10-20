@@ -39,7 +39,7 @@
                 {
                     "name": "",
                     "id": "c93f395a-e21b-4029-b7ca-a08edefe44ae",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
