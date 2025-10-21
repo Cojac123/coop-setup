@@ -156,6 +156,9 @@ MonoBehaviour:
   moveSpeed: 20
   jumpForce: 10
   playerIndex: 1
+  materials:
+  - {fileID: 2100000, guid: f1ee41551de771a4ebec24d1bf0d9575, type: 2}
+  - {fileID: 2100000, guid: bef27e7baede9ad47a0789caf1fcfeda, type: 2}
 --- !u!114 &4199831394815365314
 MonoBehaviour:
   m_ObjectHideFlags: 0
