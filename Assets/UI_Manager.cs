@@ -1,37 +1,38 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     [Header("UI References")]
-    public TMP_Text timerText;           // drag TimerText here
-    public TMP_Text player1ScoreText;    // drag Player1ScoreText here
-    public TMP_Text player2ScoreText;    // drag Player2ScoreText here
-    public Image mashMeterP1;
-    public Image mashMeterP2;
+    public TMP_Text timerText;           // Drag your TimerText here
+    public TMP_Text player1ScoreText;    // Drag your Player1ScoreText here
+    public TMP_Text player2ScoreText;    // Drag your Player2ScoreText here
 
-    // --- Update the timer on screen ---
+    [Header("Optional Mash Meters")]
+    public Image mashMeterP1;            // (optional) can leave empty
+    public Image mashMeterP2;            // (optional) can leave empty
+
+    //  Update the timer display
     public void UpdateTimerDisplay(float timeRemaining)
     {
-        timerText.text = "Time: " + Mathf.CeilToInt(timeRemaining);
+        if (timerText != null)
+            timerText.text = "Time: " + Mathf.CeilToInt(timeRemaining);
     }
 
-    // --- Update both player scores ---
+    //  Update both player scores
     public void UpdateScores(int p1, int p2)
     {
-        player1ScoreText.text = "P1 Score: " + p1;
-        player2ScoreText.text = "P2 Score: " + p2;
-
-        if (mashMeterP1 != null)
-            mashMeterP1.fillAmount = Mathf.Clamp01(p1 / 100f);
-        if (mashMeterP2 != null)
-            mashMeterP2.fillAmount = Mathf.Clamp01(p2 / 100f);
+        if (player1ScoreText != null)
+            player1ScoreText.text = "P1 Score: " + p1;
+        if (player2ScoreText != null)
+            player2ScoreText.text = "P2 Score: " + p2;
     }
 
-    // --- Display final winner message ---
+    //  Show who won at the end
     public void DisplayWinner(string message)
     {
-        timerText.text = message;
+        if (timerText != null)
+            timerText.text = message;
     }
 }
