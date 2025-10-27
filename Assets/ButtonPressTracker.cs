@@ -39,6 +39,7 @@ public class ButtonMashManager : MonoBehaviour
 
     void Start()
     {
+        StartGame();
         remainingTime = gameDuration;
         UpdateUI();
     }
@@ -74,7 +75,7 @@ public class ButtonMashManager : MonoBehaviour
         // Get which key was pressed
         var control = ctx.control.displayName;
         if (control == "Z") p1Score++;
-        else if (control == "M") p2Score++;
+        else if (control == "Left Button") p2Score++;
 
         Debug.Log($"Button pressed: {control} | P1: {p1Score} | P2: {p2Score}");
     }

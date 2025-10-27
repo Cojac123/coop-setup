@@ -49,11 +49,11 @@
                 },
                 {
                     "name": "",
-                    "id": "a28d6f23-b285-4cc6-8b54-a16c8d44c41e",
-                    "path": "<Keyboard>/space",
+                    "id": "26a46af0-5804-48b2-8712-6d5953badb33",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";mouse",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -79,6 +79,17 @@
                     "action": "ButtonMash",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bf8129be-2b36-4c2a-bb90-ea6d105f317b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";mouse",
+                    "action": "ButtonMash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -101,6 +112,17 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "mouse",
+            "bindingGroup": "mouse",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }

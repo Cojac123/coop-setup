@@ -201,26 +201,14 @@ MonoBehaviour:
     m_ActionId: 73e9a956-c9ce-473b-8ac4-892ce67f36ca
     m_ActionName: 'Player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8216439949078953682}
-        m_TargetAssemblyTypeName: PlayerLogic, Assembly-CSharp
-        m_MethodName: Move
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 8d0e3222-f6b4-4119-a1fe-9582f1cb7e90
-    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+      m_Calls: []
+    m_ActionId: dc59b13a-4403-420d-ab3c-2e5af9052e0b
+    m_ActionName: 'Player/ButtonMash[/Keyboard/z,/Keyboard/m]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 8022311162680045203}
 --- !u!1 &5559567921759117599
 GameObject:
   m_ObjectHideFlags: 0

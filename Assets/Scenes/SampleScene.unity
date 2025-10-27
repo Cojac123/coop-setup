@@ -938,7 +938,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1504020932}
-  - component: {fileID: 1504020934}
   - component: {fileID: 1504020933}
   m_Layer: 0
   m_Name: GameManager
@@ -978,24 +977,6 @@ MonoBehaviour:
   player1ScoreText: {fileID: 473513148}
   player2ScoreText: {fileID: 415289087}
   gameDuration: 60
---- !u!114 &1504020934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504020930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 274bdad30bf55a344bd3a9be0ffd18bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiManager: {fileID: 0}
-  timerDuration: 60
-  timeRemaining: 0
-  timerRunning: 0
-  player1Score: 0
-  player2Score: 0
 --- !u!1 &1547879865
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,7 +1139,7 @@ MonoBehaviour:
     m_Reference: {fileID: 0}
   m_PlayerPrefab: {fileID: 654506598797258298, guid: 991f964250a9ce148969e3e4d5d2ef93, type: 3}
   m_SplitScreen: 1
-  m_MaintainAspectRatioInSplitScreen: 1
+  m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
   m_SplitScreenRect:
     serializedVersion: 2

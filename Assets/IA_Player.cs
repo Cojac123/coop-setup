@@ -71,11 +71,11 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a28d6f23-b285-4cc6-8b54-a16c8d44c41e"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""id"": ""26a46af0-5804-48b2-8712-6d5953badb33"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";mouse"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -101,6 +101,17 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
                     ""action"": ""ButtonMash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf8129be-2b36-4c2a-bb90-ea6d105f317b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";mouse"",
+                    ""action"": ""ButtonMash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -123,6 +134,17 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""mouse"",
+            ""bindingGroup"": ""mouse"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Mouse>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -266,6 +288,15 @@ public partial class @IA_Player: IInputActionCollection2, IDisposable
         {
             if (m_GamePadSchemeIndex == -1) m_GamePadSchemeIndex = asset.FindControlSchemeIndex("GamePad");
             return asset.controlSchemes[m_GamePadSchemeIndex];
+        }
+    }
+    private int m_mouseSchemeIndex = -1;
+    public InputControlScheme mouseScheme
+    {
+        get
+        {
+            if (m_mouseSchemeIndex == -1) m_mouseSchemeIndex = asset.FindControlSchemeIndex("mouse");
+            return asset.controlSchemes[m_mouseSchemeIndex];
         }
     }
     public interface IPlayerActions
