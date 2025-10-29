@@ -9,7 +9,7 @@ public class PlayerLogic : MonoBehaviour
 
     [SerializeField]
     Material[] materials;
-    
+
     Vector2 input;
     Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,13 +24,13 @@ public class PlayerLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-  
+
     }
 
-   public void Jump(InputAction.CallbackContext ctx)
+    public void Jump(InputAction.CallbackContext ctx)
     {
-        if(ctx.performed)
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        if (ctx.performed)
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     public void Move(InputAction.CallbackContext ctx)
@@ -39,6 +39,6 @@ public class PlayerLogic : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rb.AddForce(new Vector3(input.x, 0, input.y) *moveSpeed, ForceMode.Acceleration);
+        rb.AddForce(new Vector3(input.x, 0, input.y) * moveSpeed, ForceMode.Acceleration);
     }
 }
