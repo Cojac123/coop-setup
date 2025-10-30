@@ -10,23 +10,37 @@ public class ButtonMashManager : MonoBehaviour
     public TMP_Text timerText;
     public TMP_Text player1ScoreText;
     public TMP_Text player2ScoreText;
-    public TMP_Text winnerText;       // 🆕 Create a TMP Text for “Winner” and drag it here
+    public TMP_Text winnerText; // Winner announcement text
     public Image mashMeterP1;
     public Image mashMeterP2;
     public Image startOverlay;
+    public UIManager uiManager; // Optional cooldown UI display
+
+    [Header("Spawner Reference")]
+    public PlayerSpawner playerSpawner; // 🆕 reference to PlayerSpawner
 
     [Header("Game Settings")]
     public float gameDuration = 60f;
     public float fadeSpeed = 1.5f;
-    public float resultDelay = 3f;     // 🆕 Time before resetting after showing winner
+    public float resultDelay = 3f;
+
+    [Header("Cooldown Settings")]
+    public float baseCooldown = 0.5f; // seconds
+    public float maxCooldown = 1.5f;
+    public float minCooldown = 0.1f;
 
     private float remainingTime;
     private bool gameRunning = false;
     private bool fadingOut = false;
-    private bool gameEnding = false;   // 🆕
+    private bool gameEnding = false;
 
     private int p1Score = 0;
     private int p2Score = 0;
+
+    private float p1Cooldown = 0f;
+    private float p2Cooldown = 0f;
+    private float p1LastMashTime = -999f;
+    private float p2LastMashTime = -999f;
 
     private IA_Player inputActions;
 
@@ -38,10 +52,12 @@ public class ButtonMashManager : MonoBehaviour
     void OnEnable()
     {
         inputActions.Enable();
+        inputActions.Player.ButtonMash.performed += OnButtonMash; // listen for inputs
     }
 
     void OnDisable()
     {
+        inputActions.Player.ButtonMash.performed -= OnButtonMash;
         inputActions.Disable();
     }
 
@@ -50,6 +66,7 @@ public class ButtonMashManager : MonoBehaviour
         remainingTime = gameDuration;
         UpdateUI();
 
+        // Start with black overlay
         if (startOverlay != null)
             startOverlay.color = new Color(0, 0, 0, 1);
 
@@ -57,6 +74,10 @@ public class ButtonMashManager : MonoBehaviour
 
         if (winnerText != null)
             winnerText.gameObject.SetActive(false);
+
+        // initialize cooldowns
+        p1Cooldown = baseCooldown;
+        p2Cooldown = baseCooldown;
     }
 
     void Update()
@@ -84,18 +105,27 @@ public class ButtonMashManager : MonoBehaviour
             }
         }
 
-        // 🔹 Main timer & input
+        // 🔹 Main game timer & cooldown balancing
         if (gameRunning)
         {
             remainingTime -= Time.deltaTime;
 
-            // Player 1 input
-            if (Keyboard.current.zKey.wasPressedThisFrame)
-                p1Score++;
-
-            // Player 2 input (M key or Left Mouse)
-            if (Keyboard.current.mKey.wasPressedThisFrame || Mouse.current.leftButton.wasPressedThisFrame)
-                p2Score++;
+            int scoreDiff = Mathf.Abs(p1Score - p2Score);
+            if (p1Score > p2Score)
+            {
+                p1Cooldown = Mathf.Clamp(baseCooldown + scoreDiff * 0.1f, baseCooldown, maxCooldown);
+                p2Cooldown = Mathf.Clamp(baseCooldown - scoreDiff * 0.1f, minCooldown, baseCooldown);
+            }
+            else if (p2Score > p1Score)
+            {
+                p2Cooldown = Mathf.Clamp(baseCooldown + scoreDiff * 0.1f, baseCooldown, maxCooldown);
+                p1Cooldown = Mathf.Clamp(baseCooldown - scoreDiff * 0.1f, minCooldown, baseCooldown);
+            }
+            else
+            {
+                p1Cooldown = baseCooldown;
+                p2Cooldown = baseCooldown;
+            }
 
             if (remainingTime <= 0)
             {
@@ -105,7 +135,11 @@ public class ButtonMashManager : MonoBehaviour
             }
         }
 
+        // update visuals
         UpdateMashMeters();
+        if (uiManager != null)
+            uiManager.UpdateCooldownDisplay(p1Cooldown, p2Cooldown);
+
         UpdateUI();
     }
 
@@ -116,10 +150,40 @@ public class ButtonMashManager : MonoBehaviour
         p1Score = 0;
         p2Score = 0;
 
+        // 🆕 move Player 2 back to spawn
+        if (playerSpawner != null)
+            playerSpawner.ResetPlayer2Position();
+
         if (winnerText != null)
             winnerText.gameObject.SetActive(false);
 
         Debug.Log("Game started!");
+    }
+
+    private void OnButtonMash(InputAction.CallbackContext ctx)
+    {
+        if (!gameRunning) return;
+
+        var control = ctx.control.displayName;
+        float currentTime = Time.time;
+
+        // 🟦 Player 1 (Z)
+        if (control == "Z" && currentTime - p1LastMashTime >= p1Cooldown)
+        {
+            p1Score++;
+            p1LastMashTime = currentTime;
+        }
+
+        // 🟥 Player 2 (M or Left Mouse)
+        else if ((control == "M" || control == "Left Button" || control == "Mouse Left")
+                 && currentTime - p2LastMashTime >= p2Cooldown)
+        {
+            p2Score++;
+            p2LastMashTime = currentTime;
+        }
+
+        UpdateMashMeters();
+        Debug.Log($"Button pressed: {control} | P1: {p1Score} | P2: {p2Score}");
     }
 
     private IEnumerator EndGame()
@@ -127,7 +191,6 @@ public class ButtonMashManager : MonoBehaviour
         gameEnding = true;
         SetUIActive(false);
 
-        // 🏆 Determine winner
         string result;
         if (p1Score > p2Score)
             result = "🏆 Player 1 Wins!";
@@ -142,7 +205,7 @@ public class ButtonMashManager : MonoBehaviour
             winnerText.gameObject.SetActive(true);
         }
 
-        // 🕶️ Fade to black
+        // Fade to black
         if (startOverlay != null)
         {
             startOverlay.gameObject.SetActive(true);
@@ -158,7 +221,7 @@ public class ButtonMashManager : MonoBehaviour
             }
         }
 
-        // 🕹️ Wait for space press to restart
+        // Wait for space to restart
         bool waiting = true;
         while (waiting)
         {
@@ -167,7 +230,6 @@ public class ButtonMashManager : MonoBehaviour
             yield return null;
         }
 
-        // Reset everything
         if (winnerText != null)
             winnerText.gameObject.SetActive(false);
 
@@ -176,7 +238,6 @@ public class ButtonMashManager : MonoBehaviour
         fadingOut = true;
         StartGame();
     }
-
 
     private void UpdateUI()
     {

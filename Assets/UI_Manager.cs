@@ -13,14 +13,14 @@ public class UIManager : MonoBehaviour
     public Image mashMeterP1;            // (optional) can leave empty
     public Image mashMeterP2;            // (optional) can leave empty
 
-    //  Update the timer display
+    // 🔹 Update the timer display
     public void UpdateTimerDisplay(float timeRemaining)
     {
         if (timerText != null)
             timerText.text = "Time: " + Mathf.CeilToInt(timeRemaining);
     }
 
-    //  Update both player scores
+    // 🔹 Update both player scores
     public void UpdateScores(int p1, int p2)
     {
         if (player1ScoreText != null)
@@ -29,10 +29,17 @@ public class UIManager : MonoBehaviour
             player2ScoreText.text = "P2 Score: " + p2;
     }
 
-    //  Show who won at the end
+    // 🔹 Show who won at the end
     public void DisplayWinner(string message)
     {
         if (timerText != null)
             timerText.text = message;
+    }
+
+    // 🔹 Add this method so ButtonMashManager compiles correctly
+    public void UpdateCooldownDisplay(float p1Cooldown, float p2Cooldown)
+    {
+        // Optional: Log the cooldowns so you can monitor them in the Console
+        Debug.Log($"Cooldowns — P1: {p1Cooldown:F2}s | P2: {p2Cooldown:F2}s");
     }
 }

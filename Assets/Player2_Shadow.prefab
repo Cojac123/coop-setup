@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8216439949078953682}
   - component: {fileID: 4199831394815365314}
   m_Layer: 0
-  m_Name: Jeff
+  m_Name: Player2_Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,7 +157,6 @@ MonoBehaviour:
   jumpForce: 10
   playerIndex: 1
   materials:
-  - {fileID: 2100000, guid: f1ee41551de771a4ebec24d1bf0d9575, type: 2}
   - {fileID: 2100000, guid: bef27e7baede9ad47a0789caf1fcfeda, type: 2}
 --- !u!114 &4199831394815365314
 MonoBehaviour:

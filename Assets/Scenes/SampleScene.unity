@@ -1057,9 +1057,13 @@ MonoBehaviour:
   mashMeterP1: {fileID: 0}
   mashMeterP2: {fileID: 0}
   startOverlay: {fileID: 1407184812}
+  uiManager: {fileID: 0}
   gameDuration: 60
   fadeSpeed: 1.5
   resultDelay: 3
+  baseCooldown: 0.5
+  maxCooldown: 1.5
+  minCooldown: 0.1
 --- !u!1 &1547879865
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,7 +1167,7 @@ Transform:
   m_GameObject: {fileID: 1547879865}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -9}
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1203,7 +1207,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2, y: 30}
+  m_AnchoredPosition: {x: -2, y: 64}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1715877429
@@ -1305,6 +1309,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715877427}
   m_CullTransparentMesh: 1
+--- !u!1 &1765364672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1765364673}
+  - component: {fileID: 1765364674}
+  m_Layer: 0
+  m_Name: Player2Relocator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1765364673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765364672}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1765364674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765364672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acccce2a00669094c80e47738de7b236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player2Object: {fileID: 654506598797258298, guid: 991f964250a9ce148969e3e4d5d2ef93, type: 3}
+  newPosition: {x: 4, y: 1, z: 0}
 --- !u!1 &2125344054
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,3 +1443,4 @@ SceneRoots:
   - {fileID: 1312139376}
   - {fileID: 1504020932}
   - {fileID: 759607413}
+  - {fileID: 1765364673}
