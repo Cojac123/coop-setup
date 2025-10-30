@@ -13,6 +13,15 @@ public class UIManager : MonoBehaviour
     public Image mashMeterP1;            // (optional) can leave empty
     public Image mashMeterP2;            // (optional) can leave empty
 
+    public TMP_Text p1CooldownText;
+    public TMP_Text p2CooldownText;
+
+    public void UpdateCooldownDisplay(float p1CD, float p2CD)
+    {
+        if (p1CooldownText != null) p1CooldownText.text = $"P1 CD: {p1CD:F2}s";
+        if (p2CooldownText != null) p2CooldownText.text = $"P2 CD: {p2CD:F2}s";
+    }
+
     //  Update the timer display
     public void UpdateTimerDisplay(float timeRemaining)
     {
