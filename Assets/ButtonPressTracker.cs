@@ -17,7 +17,8 @@ public class ButtonMashManager : MonoBehaviour
     public UIManager uiManager; // Optional cooldown UI display
 
     [Header("Spawner Reference")]
-    public PlayerSpawner playerSpawner; // 🆕 reference to PlayerSpawner
+    public SpawnManager playerSpawner;
+    // 🆕 reference to PlayerSpawner
 
     [Header("Game Settings")]
     public float gameDuration = 60f;

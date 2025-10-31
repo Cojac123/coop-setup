@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerSpawner : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
     [Header("Player Prefabs")]
     public GameObject player1Prefab;
@@ -32,17 +32,20 @@ public class PlayerSpawner : MonoBehaviour
         player2 = Instantiate(player2Prefab, spawnPoint2.position, Quaternion.identity);
         player2.name = "Player2";
 
-        Debug.Log(" Players spawned at separate positions!");
+        Debug.Log("✅ Players spawned at separate positions!");
     }
 
-    // 🔹 This ONLY repositions Player 2 when a new round starts
+    // 🆕 This fixes your error and resets Player 2's position
     public void ResetPlayer2Position()
     {
         if (player2 != null && spawnPoint2 != null)
         {
             player2.transform.position = spawnPoint2.position;
-            player2.transform.rotation = Quaternion.identity;
-            Debug.Log(" Player 2 repositioned for new round!");
+            Debug.Log("Player 2 reset to spawn point!");
+        }
+        else
+        {
+            Debug.LogWarning("Player 2 or SpawnPoint2 not assigned!");
         }
     }
 }
